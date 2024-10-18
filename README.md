@@ -37,6 +37,13 @@ Uses Python's regex to scan the document for personally identifiable information
 Redacts the detected PII using the PyMuPDF library to modify the PDF file.
 Saves the redacted version back to the S3 bucket.
 
+7. Storing Redacted Resume (S3): The redacted version of the resume is saved in a dedicated folder in S3.
+
+8. Access Redacted Resumes (S3): Users can securely retrieve the redacted versions of their resumes from S3 using a pre-signed URL or API.
+
+9. Monitoring & Logging (CloudWatch): AWS CloudWatch is used to track the execution of the Lambda function, monitor errors, and log performance metrics for continuous improvement.
+## Diagram
+
 
 ## Package and deploy on lambda 
 Ensure you're in the pdf-redactor-lambda directory:
@@ -91,9 +98,4 @@ Create the deployment ZIP file:
 - Run your html webpage and upload your resume 
 
 
-7. Storing Redacted Resume (S3): The redacted version of the resume is saved in a dedicated folder in S3.
 
-8. Access Redacted Resumes (S3): Users can securely retrieve the redacted versions of their resumes from S3 using a pre-signed URL or API.
-
-9. Monitoring & Logging (CloudWatch): AWS CloudWatch is used to track the execution of the Lambda function, monitor errors, and log performance metrics for continuous improvement.
-## Diagram
