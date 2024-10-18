@@ -38,6 +38,59 @@ Redacts the detected PII using the PyMuPDF library to modify the PDF file.
 Saves the redacted version back to the S3 bucket.
 
 
+## Package and deploy on lambda 
+Ensure you're in the pdf-redactor-lambda directory:
+  ```
+
+    cd /path/to/pdf-redactor-lambda
+  ```
+
+
+Activate your virtual environment (if not already activated):
+```
+
+   source venv/bin/activate
+```
+
+
+Create the package directory inside pdf-redactor-lambda:
+```
+
+   mkdir package
+```
+
+
+Install the required libraries into the package directory:
+
+```
+
+  pip install --target ./package PyMuPDF boto3
+```
+
+
+Copy your Lambda function into the package directory:
+```
+
+cp lambda_function.py package
+```
+
+
+Create the deployment ZIP file:
+```
+
+   cd package
+
+  zip -r ../deployment-package.zip .
+```
+ 
+
+-  after that create lambda functiomn and upload package to lambda function
+
+- create s3 trigger with s3 bucket where your resume store from upload 
+ 
+- Run your html webpage and upload your resume 
+
+
 7. Storing Redacted Resume (S3): The redacted version of the resume is saved in a dedicated folder in S3.
 
 8. Access Redacted Resumes (S3): Users can securely retrieve the redacted versions of their resumes from S3 using a pre-signed URL or API.
