@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S3 File Upload</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1391.0/aws-sdk.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #file-input {
+            margin-bottom: 10px;
+        }
+        #upload-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        #status {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>S3 File Upload</h1>
+    <input type="file" id="file-input">
+    <button id="upload-button">Upload</button>
+    <div id="status"></div>
+
+    <script>
+        // Configure AWS SDK
+        AWS.config.update({
+            region: 'ap-south-1',
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: 'Enter your indentity pool id '
+            })
+        });
+
+        const s3 = new AWS.S3({
+            apiVersion: '2006-03-01',
+            params: {Bucket: 'resumeup'}
+        });
+
+        document.getElementById('upload-button').addEventListener('click', function() {
+            const file = document.getElementById('file-input').files[0];
+            if (!file) {
+                alert('Please select a file to upload');
+                return;
+            }
+
+            const fileName = file.name;
+            const fileKey = 'uploads/' + fileName;
+
+            s3.upload({
+                Key: fileKey,
+                Body: file,
+                ACL: 'private'
+            }, function(err, data) {
+                if (err) {
+                    console.error('Error:', err);
+                    document.getElementById('status').innerText = 'Error uploading file: ' + err.message;
+                } else {
+                    console.log('Upload Success', data.Location);
+                    document.getElementById('status').innerText = 'File uploaded successfully!';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
