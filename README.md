@@ -100,5 +100,11 @@ Create the deployment ZIP file:
  
 - Run your html webpage and upload your resume 
 
+## ScreenShots
+- Before
+  ![Screenshot 2024-10-21 223703](https://github.com/user-attachments/assets/bb09612b-cefe-4ebc-aa5f-d32a03ab9e05)
 
+
+- After
+  ![Screenshot 2024-10-21 223622](https://github.com/user-attachments/assets/26ccbf8b-84cb-4015-aa5b-99ff5678d1fc)
 
